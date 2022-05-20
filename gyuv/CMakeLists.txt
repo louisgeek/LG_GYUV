@@ -1,4 +1,3 @@
-
 # For more information about using CMake with Android Studio, read the
 # documentation: https://d.android.com/studio/projects/add-native-code.html
 
@@ -8,15 +7,8 @@ cmake_minimum_required(VERSION 3.18.1)
 # Declares and names the project.
 project("gyuv")
 
-
 #子目录-子 CMakeLists.txt 所在目录
 add_subdirectory(src/main/cpp/libyuv)
-
-
-
-
-
-
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -30,7 +22,7 @@ add_library( # Sets the name of the library.
 
              # Provides a relative path to your source file(s).
         src/main/cpp/gyuv.cpp
-        src/main/cpp/gyuvc.cpp
+        src/main/cpp/gyuvconvert.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

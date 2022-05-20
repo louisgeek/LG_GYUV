@@ -3,65 +3,109 @@
 //
 #include <jni.h>
 //
-#include "gyuvc.h"
+#include "gyuvconvert.h"
 //
-//#include <android/log.h>
+#include <android/log.h>
 //
-//#define TAG    "gyuvc"
-//#define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,TAG,__VA_ARGS__)
-
-
+#define TAG    "gyuvc"
+#define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,TAG,__VA_ARGS__)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_NV21ToI420(JNIEnv *env, jobject thiz, jbyteArray nv21_src,
-                                        jint width_src, jint height_src, jbyteArray i420_dst) {
-    jbyte *src = env->GetByteArrayElements(nv21_src, NULL);
-    jbyte *dst = env->GetByteArrayElements(i420_dst, NULL);
+Java_com_louisgeek_gyuv_GYUV_NV21ToI420(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                        jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    NV21ToI420(src, width_src, height_src, dst);
+    NV21ToI420(src, src_width, src_height, dst);
+    LOGD("NV21ToI420 %d X %d",src_width,src_height);
     //释放
-    env->ReleaseByteArrayElements(nv21_src, src, 0);
-    env->ReleaseByteArrayElements(i420_dst, dst, 0);
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_I420ToNV21(JNIEnv *env, jobject thiz, jbyteArray i420_src,
-                                        jint width_src, jint height_src, jbyteArray nv21_dst) {
-    jbyte *src = env->GetByteArrayElements(i420_src, NULL);
-    jbyte *dst = env->GetByteArrayElements(nv21_dst, NULL);
+Java_com_louisgeek_gyuv_GYUV_I420ToNV21(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                        jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    I420ToNV21(src, width_src, height_src, dst);
+    I420ToNV21(src, src_width, src_height, dst);
+    LOGD("I420ToNV21 %d X %d",src_width,src_height);
     //释放
-    env->ReleaseByteArrayElements(i420_src, src, 0);
-    env->ReleaseByteArrayElements(nv21_dst, dst, 0);
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
 }
-
-
 
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_louisgeek_gyuv_GYUV_NV12ToI420(JNIEnv *env, jobject thiz, jbyteArray nv12_src,
-                                        jint width_src, jint height_src, jbyteArray i420_dst) {
+                                        jint src_width, jint src_height, jbyteArray dst_data) {
     jbyte *src = env->GetByteArrayElements(nv12_src, NULL);
-    jbyte *dst = env->GetByteArrayElements(i420_dst, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    NV12ToI420(src, width_src, height_src, dst);
+    NV12ToI420(src, src_width, src_height, dst);
+    LOGD("NV12ToI420 %d X %d",src_width,src_height);
     //释放
     env->ReleaseByteArrayElements(nv12_src, src, 0);
-    env->ReleaseByteArrayElements(i420_dst, dst, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_I420ToNV12(JNIEnv *env, jobject thiz, jbyteArray i420_src,
-                                        jint width_src, jint height_src, jbyteArray nv12_dst) {
-    jbyte *src = env->GetByteArrayElements(i420_src, NULL);
-    jbyte *dst = env->GetByteArrayElements(nv12_dst, NULL);
+Java_com_louisgeek_gyuv_GYUV_I420ToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                        jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    I420ToNV12(src, width_src, height_src, dst);
+    I420ToNV12(src, src_width, src_height, dst);
+    LOGD("I420ToNV12 %d X %d",src_width,src_height);
     //释放
-    env->ReleaseByteArrayElements(i420_src, src, 0);
-    env->ReleaseByteArrayElements(nv12_dst, dst, 0);
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_NV21ToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                        jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    NV21ToNV12(src, src_width, src_height, dst);
+    LOGD("NV21ToNV12 %d X %d",src_width,src_height);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_YUY2ToI420(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                        jint src_width, jint src_height, jbyteArray dst_data,
+                                        jint dst_stride) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    YUY2ToI420(src, src_width, src_height, dst,dst_stride);
+    LOGD("YUY2ToI420 %d X %d",src_width,src_height);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_I420ToYUY2(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                        jint src_width, jint src_height, jbyteArray dst_data,
+                                        jint dst_stride) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    I420ToYUY2(src, src_width, src_height, dst,dst_stride);
+    LOGD("I420ToYUY2 %d X %d",src_width,src_height);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
 }
