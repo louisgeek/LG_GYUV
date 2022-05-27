@@ -3,22 +3,22 @@
 //
 #include <jni.h>
 //
-#include "gyuvconvert.h"
+#include "yuvc.h"
 //
 #include <android/log.h>
 //
-#define TAG    "gyuvc"
+#define TAG    "gyuv"
 #define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,TAG,__VA_ARGS__)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_NV21ToI420(JNIEnv *env, jobject thiz, jbyteArray src_data,
-                                        jint src_width, jint src_height, jbyteArray dst_data) {
+Java_com_louisgeek_gyuv_GYUV_gyuvNV21ToI420(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
     jbyte *src = env->GetByteArrayElements(src_data, NULL);
     jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    NV21ToI420(src, src_width, src_height, dst);
-    LOGD("NV21ToI420 %d X %d",src_width,src_height);
+    LOGD("gyuvNV21ToI420 %d X %d", src_width, src_height);
+    yuvNV21ToI420(src, src_width, src_height, dst);
     //释放
     env->ReleaseByteArrayElements(src_data, src, 0);
     env->ReleaseByteArrayElements(dst_data, dst, 0);
@@ -26,13 +26,13 @@ Java_com_louisgeek_gyuv_GYUV_NV21ToI420(JNIEnv *env, jobject thiz, jbyteArray sr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_I420ToNV21(JNIEnv *env, jobject thiz, jbyteArray src_data,
-                                        jint src_width, jint src_height, jbyteArray dst_data) {
+Java_com_louisgeek_gyuv_GYUV_gyuvI420ToNV21(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
     jbyte *src = env->GetByteArrayElements(src_data, NULL);
     jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    I420ToNV21(src, src_width, src_height, dst);
-    LOGD("I420ToNV21 %d X %d",src_width,src_height);
+    LOGD("gyuvI420ToNV21 %d X %d", src_width, src_height);
+    yuvI420ToNV21(src, src_width, src_height, dst);
     //释放
     env->ReleaseByteArrayElements(src_data, src, 0);
     env->ReleaseByteArrayElements(dst_data, dst, 0);
@@ -40,27 +40,13 @@ Java_com_louisgeek_gyuv_GYUV_I420ToNV21(JNIEnv *env, jobject thiz, jbyteArray sr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_NV12ToI420(JNIEnv *env, jobject thiz, jbyteArray nv12_src,
-                                        jint src_width, jint src_height, jbyteArray dst_data) {
-    jbyte *src = env->GetByteArrayElements(nv12_src, NULL);
-    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
-    //
-    NV12ToI420(src, src_width, src_height, dst);
-    LOGD("NV12ToI420 %d X %d",src_width,src_height);
-    //释放
-    env->ReleaseByteArrayElements(nv12_src, src, 0);
-    env->ReleaseByteArrayElements(dst_data, dst, 0);
-}
-
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_I420ToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
-                                        jint src_width, jint src_height, jbyteArray dst_data) {
+Java_com_louisgeek_gyuv_GYUV_gyuvNV12ToI420(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
     jbyte *src = env->GetByteArrayElements(src_data, NULL);
     jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    I420ToNV12(src, src_width, src_height, dst);
-    LOGD("I420ToNV12 %d X %d",src_width,src_height);
+    LOGD("gyuvNV12ToI420 %d X %d", src_width, src_height);
+    yuvNV12ToI420(src, src_width, src_height, dst);
     //释放
     env->ReleaseByteArrayElements(src_data, src, 0);
     env->ReleaseByteArrayElements(dst_data, dst, 0);
@@ -68,13 +54,13 @@ Java_com_louisgeek_gyuv_GYUV_I420ToNV12(JNIEnv *env, jobject thiz, jbyteArray sr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_NV21ToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
-                                        jint src_width, jint src_height, jbyteArray dst_data) {
+Java_com_louisgeek_gyuv_GYUV_gyuvI420ToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
     jbyte *src = env->GetByteArrayElements(src_data, NULL);
     jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    NV21ToNV12(src, src_width, src_height, dst);
-    LOGD("NV21ToNV12 %d X %d",src_width,src_height);
+    LOGD("gyuvI420ToNV12 %d X %d", src_width, src_height);
+    yuvI420ToNV12(src, src_width, src_height, dst);
     //释放
     env->ReleaseByteArrayElements(src_data, src, 0);
     env->ReleaseByteArrayElements(dst_data, dst, 0);
@@ -82,14 +68,13 @@ Java_com_louisgeek_gyuv_GYUV_NV21ToNV12(JNIEnv *env, jobject thiz, jbyteArray sr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_YUY2ToI420(JNIEnv *env, jobject thiz, jbyteArray src_data,
-                                        jint src_width, jint src_height, jbyteArray dst_data,
-                                        jint dst_stride) {
+Java_com_louisgeek_gyuv_GYUV_gyuvNV21ToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
     jbyte *src = env->GetByteArrayElements(src_data, NULL);
     jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    YUY2ToI420(src, src_width, src_height, dst,dst_stride);
-    LOGD("YUY2ToI420 %d X %d",src_width,src_height);
+    LOGD("gyuvNV21ToNV12 %d X %d", src_width, src_height);
+    yuvNV21ToNV12(src, src_width, src_height, dst);
     //释放
     env->ReleaseByteArrayElements(src_data, src, 0);
     env->ReleaseByteArrayElements(dst_data, dst, 0);
@@ -97,14 +82,29 @@ Java_com_louisgeek_gyuv_GYUV_YUY2ToI420(JNIEnv *env, jobject thiz, jbyteArray sr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_louisgeek_gyuv_GYUV_I420ToYUY2(JNIEnv *env, jobject thiz, jbyteArray src_data,
-                                        jint src_width, jint src_height, jbyteArray dst_data,
-                                        jint dst_stride) {
+Java_com_louisgeek_gyuv_GYUV_gyuvYUY2ToI420(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data,
+                                            jint dst_stride) {
     jbyte *src = env->GetByteArrayElements(src_data, NULL);
     jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
     //
-    I420ToYUY2(src, src_width, src_height, dst,dst_stride);
-    LOGD("I420ToYUY2 %d X %d",src_width,src_height);
+    LOGD("gyuvYUY2ToI420 %d X %d", src_width, src_height);
+    yuvYUY2ToI420(src, src_width, src_height, dst, dst_stride);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuvI420ToYUY2(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data,
+                                            jint dst_stride) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuvI420ToYUY2 %d X %d", src_width, src_height);
+    yuvI420ToYUY2(src, src_width, src_height, dst, dst_stride);
     //释放
     env->ReleaseByteArrayElements(src_data, src, 0);
     env->ReleaseByteArrayElements(dst_data, dst, 0);
