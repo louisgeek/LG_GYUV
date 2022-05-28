@@ -2,7 +2,8 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
-
+def PUBLISH_GROUP_ID = "com.louisgeek"
+def PUBLISH_ARTIFACT_ID = "gyuv"
 android {
     compileSdk 32
 
@@ -30,6 +31,8 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        //设置唯一名字 "com.louisgeek.gyuv"
+        kotlinOptions.freeCompilerArgs += ['-module-name', "$PUBLISH_GROUP_ID.$PUBLISH_ARTIFACT_ID"]
     }
     kotlinOptions {
         jvmTarget = '1.8'

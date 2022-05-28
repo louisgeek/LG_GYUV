@@ -1,6 +1,5 @@
-package com.louis.mylibyuv
+package com.louis.gyuv
 
-import android.graphics.ImageFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
