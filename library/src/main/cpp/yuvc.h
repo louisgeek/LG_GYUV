@@ -41,8 +41,9 @@ void yuvI420Crop(jbyte *src, jint width, jint height, jbyte *dst, jint dst_width
 
 void yuvI420Mirror(jbyte *src, jint width, jint height, jbyte *dst);
 
-
 void nv16_to_nv12(jbyte *src, jint width, jint height, jbyte *dst);
+
+void yuv420p_to_yuv422p(jbyte *src, jint width, jint height, jbyte *dst);
 
 void yuv420p_to_nv12(jbyte *src, jint width, jint height, jbyte *dst);
 

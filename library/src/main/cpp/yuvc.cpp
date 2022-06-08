@@ -360,6 +360,33 @@ void nv16_to_nv12(jbyte *nv16_buff, jint w, jint h, jbyte *nv12_buff) {
     }
 }
 
+void yuv420p_to_yuv422p(jbyte *i420, jint width, jint height, jbyte *yuv422) {
+    jbyte *yuv420[3];
+    yuv420[0] = i420;
+    yuv420[1] = i420 + (width * height);
+    yuv420[2] = i420 + (width * height) + (width * height / 4);
+    int x, y;
+    //亮度信号Y复制
+    int Ylen = width * height;
+    memcpy(yuv422, yuv420[0], Ylen);
+    //色度信号U复制
+    jbyte *pU422 = yuv422 + Ylen; //指向U的位置
+    int Uwidth = width >> 1; //422色度信号U宽度
+    int Uheight = height >> 1; //422色度信号U高度
+    for (y = 0; y < Uheight; y++) {
+        memcpy(pU422 + y * width, yuv420[1] + y * Uwidth, Uwidth);
+        memcpy(pU422 + y * width + Uwidth, yuv420[1] + y * Uwidth, Uwidth);
+    }
+    //色度信号V复制
+    jbyte *pV422 = yuv422 + Ylen + (Ylen >> 1); //指向V的位置
+    int Vwidth = Uwidth; //422色度信号V宽度
+    int Vheight = Uheight; //422色度信号U宽度
+    for (y = 0; y < Vheight; y++) {
+        memcpy(pV422 + y * width, yuv420[2] + y * Vwidth, Vwidth);
+        memcpy(pV422 + y * width + Vwidth, yuv420[2] + y * Vwidth, Vwidth);
+    }
+}
+
 /**
 yyyy yyyy
 uv    uv

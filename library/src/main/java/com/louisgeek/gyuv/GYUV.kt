@@ -103,6 +103,13 @@ object GYUV {
         dst_data: ByteArray
     )
 
+    external fun gyuv420pTo422p(
+        src_data: ByteArray,
+        src_width: Int,
+        src_height: Int,
+        dst_data: ByteArray
+    )
+
     external fun gyuv420pToNV12(
         src_data: ByteArray,
         src_width: Int,
