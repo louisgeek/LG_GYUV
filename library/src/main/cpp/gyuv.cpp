@@ -109,3 +109,126 @@ Java_com_louisgeek_gyuv_GYUV_gyuvI420ToYUY2(JNIEnv *env, jobject thiz, jbyteArra
     env->ReleaseByteArrayElements(src_data, src, 0);
     env->ReleaseByteArrayElements(dst_data, dst, 0);
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuvI420Scale(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                           jint src_width, jint src_height, jbyteArray dst_data,
+                                           jint dst_width, jint dst_height, jint mode) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuvI420Scale %d X %d", src_width, src_height);
+    yuvI420Scale(src, src_width, src_height, dst, dst_width, dst_height, mode);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuvI420Rotate(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data,
+                                            jint degree) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuvI420Rotate %d X %d", src_width, src_height);
+    yuvI420Rotate(src, src_width, src_height, dst, degree);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuvI420Crop(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                          jint src_width, jint src_height, jbyteArray dst_data,
+                                          jint dst_width, jint dst_height, jint left, jint top) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuvI420Crop %d X %d", src_width, src_height);
+    yuvI420Crop(src, src_width, src_height, dst, dst_width, dst_height, left, top);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuvI420Mirror(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuvI420Mirror %d X %d", src_width, src_height);
+    yuvI420Mirror(src, src_width, src_height, dst);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuvNV16ToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuvNV16ToNV12 %d X %d", src_width, src_height);
+    nv16_to_nv12(src, src_width, src_height, dst);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuv420pToNV12(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuv420pToNV12 %d X %d", src_width, src_height);
+    yuv420p_to_nv12(src, src_width, src_height, dst);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuv420pToNV21(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuv420pToNV21 %d X %d", src_width, src_height);
+    yuv420p_to_nv21(src, src_width, src_height, dst);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuv422pToNV16(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuv422pToNV16 %d X %d", src_width, src_height);
+    yuv422p_to_nv16(src, src_width, src_height, dst);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_louisgeek_gyuv_GYUV_gyuv422pToNV61(JNIEnv *env, jobject thiz, jbyteArray src_data,
+                                            jint src_width, jint src_height, jbyteArray dst_data) {
+    jbyte *src = env->GetByteArrayElements(src_data, NULL);
+    jbyte *dst = env->GetByteArrayElements(dst_data, NULL);
+    //
+    LOGD("gyuv422pToNV61 %d X %d", src_width, src_height);
+    yuv422p_to_nv61(src, src_width, src_height, dst);
+    //释放
+    env->ReleaseByteArrayElements(src_data, src, 0);
+    env->ReleaseByteArrayElements(dst_data, dst, 0);
+}
